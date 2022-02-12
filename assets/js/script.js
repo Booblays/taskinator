@@ -126,8 +126,7 @@ var taskStatusChangeHandler = function(event) {
     var taskId = event.target.getAttribute("data-task-id");
 
     var taskSelected = document.querySelector(".task-item[data-task-id='" + taskId + "']");
-
-  
+    console.log(taskSelected)
     var statusValue = event.target.value.toLowerCase();
 
     
