@@ -208,13 +208,15 @@ var saveTasks = function() {
 }
 
 var loadTasks = function() {
-    // Gets task items from localStorage.
-    var tasks = localStorage.getItem("tasks");
+    var savedTasks = localStorage.getItem("tasks");
+
+    if (!savedTasks) {
+        return false
+    };
+    
+    tasks = JSON.parse(savedTasks);
     console.log(tasks);
-    // Converts tasks from the string format back into an array of objects.
-    tasks = JSON.parse(tasks);
-    console.log(tasks);
-    // Iterates through a tasks array and creates task elements on the page from it.
+    
     for (var i = 0; i < tasks.length; i++) {
         taskIdCounter = tasks[i].id;
 
@@ -238,11 +240,12 @@ var loadTasks = function() {
             listItemEl.querySelector("select[name='status-change']").selectedIndex = 1;
             tasksInProgressEl.appendChild(listItemEl);
         }
-        else if (tasks[i].status === "complete") {
+        else if (tasks[i].status === "completed") {
             listItemEl.querySelector("select[name='status-change']").selectedIndex = 2;
             tasksCompletedEl.appendChild(listItemEl);
         }
     }
+    
 };
 
 
